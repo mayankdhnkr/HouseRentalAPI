@@ -1,0 +1,13 @@
+package web.project.HouseRentalAPI;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class HouseRentalApiApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
