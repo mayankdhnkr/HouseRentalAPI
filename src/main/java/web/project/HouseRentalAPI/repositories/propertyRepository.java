@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface propertyRepository extends MongoRepository<property,String> {
     List<property> findByOwnerId(String id);
+    List<property> findByNameContainingIgnoreCaseOrCityContainingIgnoreCaseOrTypeContainingIgnoreCase(String name, String city, String type);
 }

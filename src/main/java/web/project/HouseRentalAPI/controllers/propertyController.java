@@ -30,7 +30,6 @@ public class propertyController {
 
 
     @PostMapping("/add")
-    @CrossOrigin
     public ResponseEntity<?> createProperty(@RequestBody property user){
         // Save the property
         property newProperty=propertyRepository.save(user);
@@ -45,7 +44,6 @@ public class propertyController {
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<?> getPropertyById(@PathVariable String id){
         Optional<property> propertyOptional = propertyRepository.findById(id);
         if (propertyOptional.isEmpty()) {
@@ -55,7 +53,6 @@ public class propertyController {
     }
 
     @GetMapping("/getall")
-    @CrossOrigin
     public ResponseEntity<List<property>> getAllUsers() {
         List<property> properties = propertyRepository.findAll();
         if (properties.isEmpty()) {
@@ -64,8 +61,16 @@ public class propertyController {
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<property>> searchPropertyByQuery(@RequestParam("query") String query) {
+        List<property> properties = propertyRepository.findByNameContainingIgnoreCaseOrCityContainingIgnoreCaseOrTypeContainingIgnoreCase(query, query, query);
+        if (properties.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
+    }
+
     @DeleteMapping("/delete/{id}")
-    @CrossOrigin
     public ResponseEntity<?> deletePropertyById(@PathVariable String id){
         //Check if Exists
         if(!propertyRepository.existsById(id)){

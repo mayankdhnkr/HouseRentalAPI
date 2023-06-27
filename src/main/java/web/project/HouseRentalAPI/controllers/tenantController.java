@@ -101,6 +101,15 @@ public class tenantController {
         return ResponseEntity.status(HttpStatus.OK).body(tenants);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<tenant>> searchTenantsByName(@RequestParam("name") String name) {
+        List<tenant> tenants = tenantRepository.findByNameContainingIgnoreCase(name);
+        if (tenants.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(tenants);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable String id) {
         //Check if Exists

@@ -11,4 +11,5 @@ public interface tenantRepository extends MongoRepository<tenant,String> {
     boolean existsByPhone(String phone);
     Optional<tenant> findByEmail(String email);
     List<tenant> findByLandlordId(String id);
+    List<tenant> findByNameContainingIgnoreCase(String name);
 }
