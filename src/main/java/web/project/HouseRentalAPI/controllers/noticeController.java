@@ -47,6 +47,22 @@ public class noticeController {
         return ResponseEntity.status(HttpStatus.OK).body(notices);
     }
 
+    @GetMapping("/inactive/{id}")
+    public ResponseEntity<?> inactiveUserById(@PathVariable String id) {
+        if(!noticeRepository.existsById(id)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notice not found");
+        }
+        Optional<notice> noticeOptional = noticeRepository.findById(id);
+        if (noticeOptional.isPresent()) {
+            notice updateNotice = noticeOptional.get();
+            updateNotice.setActive(false);
+            noticeRepository.save(updateNotice);
+            return ResponseEntity.ok("Notice Inactivated.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant not found");
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable String id) {
         if(!noticeRepository.existsById(id)){
