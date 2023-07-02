@@ -144,10 +144,17 @@ public class tenantController {
         }
 
         Optional<tenant> tenantOptional = tenantRepository.findById(id);
+        Optional<property> propertyOptional=propertyRepository.findById(tenantOptional.get().getPropertyId());
         if (tenantOptional.isPresent()) {
             tenant updateTenant = tenantOptional.get();
-            updateTenant.setRentPaid(true);
-            updateTenant.setRentDue(0);
+            if(updateTenant.getRentDue()==0){
+                updateTenant.setRentPaid(false);
+                updateTenant.setRentDue(propertyOptional.get().getRent());
+            }
+            else{
+                updateTenant.setRentPaid(true);
+                updateTenant.setRentDue(0);
+            }
             tenantRepository.save(updateTenant);
             return ResponseEntity.ok("Rent has been marked as paid for the tenant.");
         } else {
