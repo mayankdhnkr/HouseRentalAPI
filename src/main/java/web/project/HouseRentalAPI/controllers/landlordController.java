@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/landlord")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","https://rent-sure.vercel.app/"})
 public class landlordController {
     @Autowired
     private landlordRepository landlordRepository;

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/notice")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","https://rent-sure.vercel.app/"})
 public class noticeController {
     @Autowired
     private web.project.HouseRentalAPI.repositories.noticeRepository noticeRepository;
@@ -70,7 +70,7 @@ public class noticeController {
         }
 
         noticeRepository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Notice deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }
