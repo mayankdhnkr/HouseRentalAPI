@@ -3,6 +3,9 @@
 <br />
 Live Api link - [https://houserentalapi-production.up.railway.app/](https://houserentalapi-production.up.railway.app/)
 <br />
+Hosted Frontend link - [https://rent-sure.vercel.app/](https://rent-sure.vercel.app/)
+<br />
+<br />
 API made for a house rental application for managment of tenants and properties. Made as a project for my Externship Program.
 
 ## Features
